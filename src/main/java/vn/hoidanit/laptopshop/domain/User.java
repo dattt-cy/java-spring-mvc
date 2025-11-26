@@ -11,8 +11,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import vn.hoidanit.laptopshop.service.validator.StrongPassword;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -27,28 +27,27 @@ public class User {
     private String email;
 
     @NotNull
-    @Min(value = 2, message = "Password phải có tối thiểu 2 ký tự")
+    @Size(min = 2, message = "Password phải có tối thiểu 2 ký tự")
+    @StrongPassword(message = "Password quá yếu")
     private String password;
 
     @NotNull
-    @Min(value = 3, message = "Fullname phải có tối thiểu 3 ký tự")
+    @Size(min = 3, message = "Fullname phải có tối thiểu 3 ký tự")
     private String fullName;
 
     private String address;
     private String phone;
+
     private String avatar;
-    // User
-    // User many -> to one ->
+
+    // roleId
+    // User many -> to one -> role
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
     @OneToMany(mappedBy = "user")
     List<Order> orders;
-
-    public String getEmail() {
-        return email;
-    }
 
     public Role getRole() {
         return role;
@@ -64,6 +63,18 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
@@ -100,14 +111,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getAvatar() {

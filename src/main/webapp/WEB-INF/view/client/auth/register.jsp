@@ -41,17 +41,18 @@ uri="http://www.springframework.org/tags/form" %>
                                         <form:form
                                             method="post"
                                             action="/register"
+                                            modelAttribute="registerUser"
                                         >
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div
                                                         class="form-floating mb-3 mb-md-0"
                                                     >
-                                                        <input
+                                                        <form:input
                                                             class="form-control"
-                                                            id="inputFirstName"
                                                             type="text"
                                                             placeholder="Enter your first name"
+                                                            path="firstName"
                                                         />
                                                         <label
                                                             for="inputFirstName"
@@ -61,11 +62,11 @@ uri="http://www.springframework.org/tags/form" %>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input
+                                                        <form:input
                                                             class="form-control"
-                                                            id="inputLastName"
                                                             type="text"
                                                             placeholder="Enter your last name"
+                                                            path="lastName"
                                                         />
                                                         <label
                                                             for="inputLastName"
@@ -75,7 +76,7 @@ uri="http://www.springframework.org/tags/form" %>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input
+                                                <form:input
                                                     class="form-control"
                                                     type="email"
                                                     placeholder="name@example.com"
@@ -88,30 +89,26 @@ uri="http://www.springframework.org/tags/form" %>
                                                     <div
                                                         class="form-floating mb-3 mb-md-0"
                                                     >
-                                                        <input
+                                                        <form:input
                                                             class="form-control"
-                                                            id="inputPassword"
                                                             type="password"
                                                             placeholder="Create a password"
+                                                            path="password"
                                                         />
-                                                        <label
-                                                            for="inputPassword"
-                                                            >Password</label
-                                                        >
+                                                        <label>Password</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div
                                                         class="form-floating mb-3 mb-md-0"
                                                     >
-                                                        <input
+                                                        <form:input
                                                             class="form-control"
-                                                            id="inputPasswordConfirm"
                                                             type="password"
                                                             placeholder="Confirm password"
+                                                            path="confirmPassword"
                                                         />
                                                         <label
-                                                            for="inputPasswordConfirm"
                                                             >Confirm
                                                             Password</label
                                                         >
