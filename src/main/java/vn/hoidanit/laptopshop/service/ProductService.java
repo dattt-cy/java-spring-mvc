@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.servlet.http.HttpSession;
 import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
@@ -44,7 +45,7 @@ public class ProductService {
         this.productRepository.deleteById(id);
     }
 
-    public void handleAddProductToCart(String email, long productId) {
+    public void handleAddProductToCart(String email, long productId, HttpSession session) {
         User user = this.userService.getUserByEmail(email);
         if (user != null) {
             Cart cart = this.cartRepository.findByUser(user);
@@ -52,15 +53,18 @@ public class ProductService {
             if (cart == null) {
                 Cart otherCart = new Cart();
                 otherCart.setUser(user);
-                otherCart.setSum(1);
+                otherCart.setSum(0);
 
                 cart = this.cartRepository.save(otherCart);
             }
             // save cart_detail
 
             Optional<Product> productOptional = this.productRepository.findById(productId);
-            if (productOptional.isPresent()) {
-                Product realProduct = productOptional.get();
+
+            Product realProduct = productOptional.get();
+            // check san pham da ton tai chua
+            CartDetail oldDetail = this.cartDetailRepository.findByCartAndProduct(cart, realProduct);
+            if (oldDetail == null) {
                 CartDetail cd = new CartDetail();
                 cd.setCart(cart);
                 cd.setProduct(realProduct);
@@ -68,6 +72,14 @@ public class ProductService {
                 cd.setQuantity(1);
 
                 this.cartDetailRepository.save(cd);
+                // update cart
+                int s = cart.getSum() + 1;
+                cart.setSum(s);
+                this.cartRepository.save(cart);
+                session.setAttribute("sum", s);
+            } else {
+                oldDetail.setQuantity(oldDetail.getQuantity() + 1);
+                this.cartDetailRepository.save(oldDetail);
             }
 
         }

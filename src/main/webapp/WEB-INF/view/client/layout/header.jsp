@@ -35,7 +35,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                     height: 20px;
                                     min-width: 20px;
                                 "
-                                >3</span
+                                >${sessionScope.sum}</span
                             >
                         </a>
 
