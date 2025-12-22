@@ -138,6 +138,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                                                 type="text"
                                                 class="form-control form-control-sm text-center border-0"
                                                 value="${cartDetail.quantity}"
+                                                data-cart-detail-id="${cartDetail.id}"
+                                                data-cart-detail-price="${cartDetail.price}"
                                             />
                                             <div class="input-group-btn">
                                                 <button
@@ -149,7 +151,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="mb-0 mt-4">
+                                        <p
+                                            class="mb-0 mt-4"
+                                            data-cart-detail-id="${cartDetail.id}"
+                                        >
                                             <fmt:formatNumber
                                                 type="number"
                                                 value="${cartDetail.price * cartDetail.quantity}"
@@ -158,13 +163,23 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                                         </p>
                                     </td>
                                     <td>
-                                        <button
-                                            class="btn btn-md rounded-circle bg-light border mt-4"
+                                        <form
+                                            method="post"
+                                            action="/delete-cart-product/${cartDetail.id}"
                                         >
-                                            <i
-                                                class="fa fa-times text-danger"
-                                            ></i>
-                                        </button>
+                                            <input
+                                                type="hidden"
+                                                name="${_csrf.parameterName}"
+                                                value="${_csrf.token}"
+                                            />
+                                            <button
+                                                class="btn btn-md rounded-circle bg-light border mt-4"
+                                            >
+                                                <i
+                                                    class="fa fa-times text-danger"
+                                                ></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -184,7 +199,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                                     class="d-flex justify-content-between mb-4"
                                 >
                                     <h5 class="mb-0 me-4">Tạm tính:</h5>
-                                    <p class="mb-0">
+                                    <p
+                                        class="mb-0"
+                                        data-cart-total-price="${totalPrice}"
+                                    >
                                         <fmt:formatNumber
                                             type="number"
                                             value="${totalPrice}"
@@ -203,7 +221,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                                 class="py-4 mb-4 border-top border-bottom d-flex justify-content-between"
                             >
                                 <h5 class="mb-0 ps-4 me-4">Tổng số tiền</h5>
-                                <p class="mb-0 pe-4">
+                                <p
+                                    class="mb-0 pe-4"
+                                    data-cart-total-price="${totalPrice}"
+                                >
                                     <fmt:formatNumber
                                         type="number"
                                         value="${totalPrice}"
