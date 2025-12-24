@@ -137,7 +137,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                                                             ${product.shortDesc}
                                                         </p>
                                                         <div
-                                                            class="d-flex flex-lg-wrap justify-content-center"
+                                                            class="d-flex flex-lg-wrap justify-content-center flex-column"
                                                         >
                                                             <p
                                                                 style="

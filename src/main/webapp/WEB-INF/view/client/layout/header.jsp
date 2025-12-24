@@ -35,10 +35,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                     height: 20px;
                                     min-width: 20px;
                                 "
-                                >${sessionScope.sum}</span
                             >
+                                ${sessionScope.sum}
+                            </span>
                         </a>
-
                         <div class="dropdown my-auto">
                             <a
                                 href="#"
@@ -83,7 +83,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                     >
                                 </li>
 
-                                <li></li>
+                                <li>
                                     <a
                                         class="dropdown-item"
                                         href="/order-history"
