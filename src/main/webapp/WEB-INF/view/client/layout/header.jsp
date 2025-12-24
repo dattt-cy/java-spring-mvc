@@ -83,8 +83,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                     >
                                 </li>
 
-                                <li>
-                                    <a class="dropdown-item" href="#"
+                                <li></li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="/order-history"
                                         >Lịch sử mua hàng</a
                                     >
                                 </li>
