@@ -82,7 +82,7 @@ uri="http://www.springframework.org/tags/form" %>
                     <div class="row g-4 fruite">
                         <div class="col-12 col-md-4">
                             <div class="row g-4">
-                                <div class="col-12">
+                                <div class="col-12" id="factoryFilter">
                                     <div class="mb-2"><b>Hãng sản xuất</b></div>
                                     <div class="form-check form-check-inline">
                                         <input
@@ -165,7 +165,7 @@ uri="http://www.springframework.org/tags/form" %>
                                         >
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12" id="targetFilter">
                                     <div class="mb-2">
                                         <b>Mục đích sử dụng</b>
                                     </div>
@@ -236,7 +236,7 @@ uri="http://www.springframework.org/tags/form" %>
                                         >
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12" id="priceFilter">
                                     <div class="mb-2"><b>Mức giá</b></div>
 
                                     <div class="form-check form-check-inline">
@@ -286,7 +286,7 @@ uri="http://www.springframework.org/tags/form" %>
                                             class="form-check-input"
                                             type="checkbox"
                                             id="price-5"
-                                            value="tren-20-triệu"
+                                            value="tren-20-trieu"
                                         />
                                         <label
                                             class="form-check-label"
@@ -333,6 +333,7 @@ uri="http://www.springframework.org/tags/form" %>
                                             class="form-check-input"
                                             type="radio"
                                             id="sort-3"
+                                            checked
                                             value="gia-nothing"
                                             name="radio-sort"
                                         />
@@ -346,6 +347,7 @@ uri="http://www.springframework.org/tags/form" %>
                                 <div class="col-12">
                                     <button
                                         class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4"
+                                        id="btnFilter"
                                     >
                                         Lọc Sản Phẩm
                                     </button>
@@ -354,6 +356,9 @@ uri="http://www.springframework.org/tags/form" %>
                         </div>
                         <div class="col-12 col-md-8 text-center">
                             <div class="row g-4">
+                                <c:if test="${totalPages ==  0}">
+                                    <div>Không tìm thấy sản phẩm</div>
+                                </c:if>
                                 <c:forEach var="product" items="${products}">
                                     <div class="col-md-6 col-lg-4">
                                         <div
@@ -427,46 +432,48 @@ uri="http://www.springframework.org/tags/form" %>
                                     </div>
                                 </c:forEach>
 
-                                <div
-                                    class="pagination d-flex justify-content-center mt-5"
-                                >
-                                    <li class="page-item">
-                                        <a
-                                            class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                            href="/products?page=${currentPage - 1}"
-                                            aria-label="Previous"
-                                        >
-                                            <span aria-hidden="true"
-                                                >&laquo;</span
-                                            >
-                                        </a>
-                                    </li>
-                                    <c:forEach
-                                        begin="0"
-                                        end="${totalPages - 1}"
-                                        varStatus="loop"
+                                <c:if test="${totalPages > 0}">
+                                    <div
+                                        class="pagination d-flex justify-content-center mt-5"
                                     >
                                         <li class="page-item">
                                             <a
-                                                class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                href="/products?page=${loop.index + 1}"
+                                                class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
+                                                href="/products?page=${currentPage - 1}"
+                                                aria-label="Previous"
                                             >
-                                                ${loop.index + 1}
+                                                <span aria-hidden="true"
+                                                    >&laquo;</span
+                                                >
                                             </a>
                                         </li>
-                                    </c:forEach>
-                                    <li class="page-item">
-                                        <a
-                                            class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                            href="/products?page=${currentPage + 1}"
-                                            aria-label="Next"
+                                        <c:forEach
+                                            begin="0"
+                                            end="${totalPages - 1}"
+                                            varStatus="loop"
                                         >
-                                            <span aria-hidden="true"
-                                                >&raquo;</span
+                                            <li class="page-item">
+                                                <a
+                                                    class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
+                                                    href="/products?page=${loop.index + 1}"
+                                                >
+                                                    ${loop.index + 1}
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+                                        <li class="page-item">
+                                            <a
+                                                class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
+                                                href="/products?page=${currentPage + 1}"
+                                                aria-label="Next"
                                             >
-                                        </a>
-                                    </li>
-                                </div>
+                                                <span aria-hidden="true"
+                                                    >&raquo;</span
+                                                >
+                                            </a>
+                                        </li>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
