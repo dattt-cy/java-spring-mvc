@@ -45,6 +45,13 @@ uri="http://www.springframework.org/tags/form" %>
 
         <!-- Template Stylesheet -->
         <link href="/client/css/style.css" rel="stylesheet" />
+        <style>
+            .page-link.disabled {
+                color: var(--bs-pagination-disabled-color);
+                pointer-events: none;
+                background-color: var(--bs-pagination-disabled-bg);
+            }
+        </style>
     </head>
 
     <body>
@@ -439,7 +446,7 @@ uri="http://www.springframework.org/tags/form" %>
                                         <li class="page-item">
                                             <a
                                                 class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                href="/products?page=${currentPage - 1}"
+                                                href="/products?page=${currentPage - 1}${queryString}"
                                                 aria-label="Previous"
                                             >
                                                 <span aria-hidden="true"
@@ -455,7 +462,7 @@ uri="http://www.springframework.org/tags/form" %>
                                             <li class="page-item">
                                                 <a
                                                     class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                    href="/products?page=${loop.index + 1}"
+                                                    href="/products?page=${loop.index + 1}${queryString}"
                                                 >
                                                     ${loop.index + 1}
                                                 </a>
@@ -464,7 +471,7 @@ uri="http://www.springframework.org/tags/form" %>
                                         <li class="page-item">
                                             <a
                                                 class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                href="/products?page=${currentPage + 1}"
+                                                href="/products?page=${currentPage + 1}${queryString}"
                                                 aria-label="Next"
                                             >
                                                 <span aria-hidden="true"
